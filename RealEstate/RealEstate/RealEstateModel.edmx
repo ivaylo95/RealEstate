@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="realestatesystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CATEGORIES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CATEGORY" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PURPOSES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PURPOSE" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="REAL_ESTATES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CITY" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="AREA" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="APARTMENT_SIZE" Type="int" Nullable="false" />
+          <Property Name="CATEGORY_ID" Type="int" Nullable="false" />
+          <Property Name="PURPOSE_ID" Type="int" Nullable="false" />
+          <Property Name="PRICE" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USERS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="USERNAME" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="PASSWORD" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="FIRST_NAME" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="LAST_NAME" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="COUNTRY" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="CITY" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="PHONE_NUMBER" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="EMAIL" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_REAL_ESTATES_CATEGORY_ID">
+          <End Role="CATEGORIES" Type="Self.CATEGORIES" Multiplicity="1" />
+          <End Role="REAL_ESTATES" Type="Self.REAL_ESTATES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="REAL_ESTATES">
+              <PropertyRef Name="CATEGORY_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REAL_ESTATES_PURPOSE_ID">
+          <End Role="PURPOSES" Type="Self.PURPOSES" Multiplicity="1" />
+          <End Role="REAL_ESTATES" Type="Self.REAL_ESTATES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PURPOSES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="REAL_ESTATES">
+              <PropertyRef Name="PURPOSE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="realestatesystemModelStoreContainer">
+          <EntitySet Name="CATEGORIES" EntityType="Self.CATEGORIES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PURPOSES" EntityType="Self.PURPOSES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="REAL_ESTATES" EntityType="Self.REAL_ESTATES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_REAL_ESTATES_CATEGORY_ID" Association="Self.FK_REAL_ESTATES_CATEGORY_ID">
+            <End Role="CATEGORIES" EntitySet="CATEGORIES" />
+            <End Role="REAL_ESTATES" EntitySet="REAL_ESTATES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REAL_ESTATES_PURPOSE_ID" Association="Self.FK_REAL_ESTATES_PURPOSE_ID">
+            <End Role="PURPOSES" EntitySet="PURPOSES" />
+            <End Role="REAL_ESTATES" EntitySet="REAL_ESTATES" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="realestatesystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CATEGORy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CATEGORY1" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="REAL_ESTATES" Relationship="Self.FK_REAL_ESTATES_CATEGORY_ID" FromRole="CATEGORIES" ToRole="REAL_ESTATES" />
+        </EntityType>
+        <EntityType Name="PURPOS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PURPOSE" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="REAL_ESTATES" Relationship="Self.FK_REAL_ESTATES_PURPOSE_ID" FromRole="PURPOSES" ToRole="REAL_ESTATES" />
+        </EntityType>
+        <EntityType Name="REAL_ESTATES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CITY" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AREA" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="APARTMENT_SIZE" Type="Int32" Nullable="false" />
+          <Property Name="CATEGORY_ID" Type="Int32" Nullable="false" />
+          <Property Name="PURPOSE_ID" Type="Int32" Nullable="false" />
+          <Property Name="PRICE" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="CATEGORy" Relationship="Self.FK_REAL_ESTATES_CATEGORY_ID" FromRole="REAL_ESTATES" ToRole="CATEGORIES" />
+          <NavigationProperty Name="PURPOS" Relationship="Self.FK_REAL_ESTATES_PURPOSE_ID" FromRole="REAL_ESTATES" ToRole="PURPOSES" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USERNAME" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PASSWORD" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FIRST_NAME" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LAST_NAME" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="COUNTRY" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CITY" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PHONE_NUMBER" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_REAL_ESTATES_CATEGORY_ID">
+          <End Role="CATEGORIES" Type="Self.CATEGORy" Multiplicity="1" />
+          <End Role="REAL_ESTATES" Type="Self.REAL_ESTATES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="REAL_ESTATES">
+              <PropertyRef Name="CATEGORY_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REAL_ESTATES_PURPOSE_ID">
+          <End Role="PURPOSES" Type="Self.PURPOS" Multiplicity="1" />
+          <End Role="REAL_ESTATES" Type="Self.REAL_ESTATES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PURPOSES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="REAL_ESTATES">
+              <PropertyRef Name="PURPOSE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="realestatesystemEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CATEGORIES" EntityType="Self.CATEGORy" />
+          <EntitySet Name="PURPOSES" EntityType="Self.PURPOS" />
+          <EntitySet Name="REAL_ESTATES" EntityType="Self.REAL_ESTATES" />
+          <EntitySet Name="USERS" EntityType="Self.USER" />
+          <AssociationSet Name="FK_REAL_ESTATES_CATEGORY_ID" Association="Self.FK_REAL_ESTATES_CATEGORY_ID">
+            <End Role="CATEGORIES" EntitySet="CATEGORIES" />
+            <End Role="REAL_ESTATES" EntitySet="REAL_ESTATES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REAL_ESTATES_PURPOSE_ID" Association="Self.FK_REAL_ESTATES_PURPOSE_ID">
+            <End Role="PURPOSES" EntitySet="PURPOSES" />
+            <End Role="REAL_ESTATES" EntitySet="REAL_ESTATES" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="realestatesystemModelStoreContainer" CdmEntityContainer="realestatesystemEntities">
+          <EntitySetMapping Name="CATEGORIES">
+            <EntityTypeMapping TypeName="realestatesystemModel.CATEGORy">
+              <MappingFragment StoreEntitySet="CATEGORIES">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CATEGORY1" ColumnName="CATEGORY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PURPOSES">
+            <EntityTypeMapping TypeName="realestatesystemModel.PURPOS">
+              <MappingFragment StoreEntitySet="PURPOSES">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PURPOSE" ColumnName="PURPOSE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="REAL_ESTATES">
+            <EntityTypeMapping TypeName="realestatesystemModel.REAL_ESTATES">
+              <MappingFragment StoreEntitySet="REAL_ESTATES">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CITY" ColumnName="CITY" />
+                <ScalarProperty Name="AREA" ColumnName="AREA" />
+                <ScalarProperty Name="APARTMENT_SIZE" ColumnName="APARTMENT_SIZE" />
+                <ScalarProperty Name="CATEGORY_ID" ColumnName="CATEGORY_ID" />
+                <ScalarProperty Name="PURPOSE_ID" ColumnName="PURPOSE_ID" />
+                <ScalarProperty Name="PRICE" ColumnName="PRICE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USERS">
+            <EntityTypeMapping TypeName="realestatesystemModel.USER">
+              <MappingFragment StoreEntitySet="USERS">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="FIRST_NAME" ColumnName="FIRST_NAME" />
+                <ScalarProperty Name="LAST_NAME" ColumnName="LAST_NAME" />
+                <ScalarProperty Name="COUNTRY" ColumnName="COUNTRY" />
+                <ScalarProperty Name="CITY" ColumnName="CITY" />
+                <ScalarProperty Name="PHONE_NUMBER" ColumnName="PHONE_NUMBER" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
