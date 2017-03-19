@@ -5,10 +5,10 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="18f3332e895c44bda1ce389da89793ff" Name="Diagram1">
-        <EntityTypeShape EntityType="realestatesystemModel.CATEGORy" Width="1.5" PointX="1.75" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="realestatesystemModel.PURPOS" Width="1.5" PointX="1.75" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="realestatesystemModel.REAL_ESTATES" Width="1.5" PointX="6.375" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="realestatesystemModel.USER" Width="1.5" PointX="4.125" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="realestatesystemModel.CATEGORy" Width="1.5" PointX="1" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="realestatesystemModel.PURPOS" Width="1.5" PointX="1" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="realestatesystemModel.REAL_ESTATES" Width="1.5" PointX="5.125" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="realestatesystemModel.USER" Width="1.5" PointX="3.25" PointY="1.25" IsExpanded="true" />
         <AssociationConnector Association="realestatesystemModel.FK_REAL_ESTATES_CATEGORY_ID" ManuallyRouted="false" />
         <AssociationConnector Association="realestatesystemModel.FK_REAL_ESTATES_PURPOSE_ID" ManuallyRouted="false" />
       </Diagram>

@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="realestatesystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CATEGORIES">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CATEGORY" Type="nvarchar" MaxLength="32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PURPOSES">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PURPOSE" Type="nvarchar" MaxLength="32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="REAL_ESTATES">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CITY" Type="nvarchar" MaxLength="32" Nullable="false" />
+    <Property Name="AREA" Type="nvarchar" MaxLength="32" Nullable="false" />
+    <Property Name="APARTMENT_SIZE" Type="int" Nullable="false" />
+    <Property Name="CATEGORY_ID" Type="int" Nullable="false" />
+    <Property Name="PURPOSE_ID" Type="int" Nullable="false" />
+    <Property Name="PRICE" Type="money" Nullable="false" />
+  </EntityType>
+  <EntityType Name="USERS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="USERNAME" Type="nvarchar" MaxLength="16" Nullable="false" />
+    <Property Name="PASSWORD" Type="nvarchar" MaxLength="16" Nullable="false" />
+    <Property Name="FIRST_NAME" Type="nvarchar" MaxLength="32" Nullable="false" />
+    <Property Name="LAST_NAME" Type="nvarchar" MaxLength="32" Nullable="false" />
+    <Property Name="COUNTRY" Type="nvarchar" MaxLength="32" Nullable="false" />
+    <Property Name="CITY" Type="nvarchar" MaxLength="32" Nullable="false" />
+    <Property Name="PHONE_NUMBER" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="EMAIL" Type="nvarchar" MaxLength="32" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_REAL_ESTATES_CATEGORY_ID">
+    <End Role="CATEGORIES" Type="Self.CATEGORIES" Multiplicity="1" />
+    <End Role="REAL_ESTATES" Type="Self.REAL_ESTATES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CATEGORIES">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="REAL_ESTATES">
+        <PropertyRef Name="CATEGORY_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_REAL_ESTATES_PURPOSE_ID">
+    <End Role="PURPOSES" Type="Self.PURPOSES" Multiplicity="1" />
+    <End Role="REAL_ESTATES" Type="Self.REAL_ESTATES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PURPOSES">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="REAL_ESTATES">
+        <PropertyRef Name="PURPOSE_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="realestatesystemModelStoreContainer">
+    <EntitySet Name="CATEGORIES" EntityType="Self.CATEGORIES" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PURPOSES" EntityType="Self.PURPOSES" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="REAL_ESTATES" EntityType="Self.REAL_ESTATES" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_REAL_ESTATES_CATEGORY_ID" Association="Self.FK_REAL_ESTATES_CATEGORY_ID">
+      <End Role="CATEGORIES" EntitySet="CATEGORIES" />
+      <End Role="REAL_ESTATES" EntitySet="REAL_ESTATES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_REAL_ESTATES_PURPOSE_ID" Association="Self.FK_REAL_ESTATES_PURPOSE_ID">
+      <End Role="PURPOSES" EntitySet="PURPOSES" />
+      <End Role="REAL_ESTATES" EntitySet="REAL_ESTATES" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
